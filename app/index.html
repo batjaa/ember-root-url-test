@@ -12,14 +12,28 @@
     <link rel="stylesheet" href="assets/vendor.css">
     <link rel="stylesheet" href="assets/root-url-test.css">
 
-    {{content-for "head-footer"}}
   </head>
   <body>
-    {{content-for "body"}}
+
+    <h1>Hello World!</h1>
+
+    <a href="/root/" class="go-to">Go to ember</a>
 
     <script src="assets/vendor.js"></script>
     <script src="assets/root-url-test.js"></script>
 
-    {{content-for "body-footer"}}
+    <script type="text/javascript">
+      var stateObj = { foo: "bar" };
+
+      $(document).on('click', '.go-to', function(ev) {
+        ev.preventDefault();
+        var url = $(ev.target).attr('href');
+        window.history.pushState(stateObj, 'RootUrlTest', url);
+        // Let's pretend somehow the `popstate` event was trigger. Maybe clicked the "Back" button
+        $(window).trigger('popstate');
+      })
+
+    </script>
+
   </body>
 </html>
